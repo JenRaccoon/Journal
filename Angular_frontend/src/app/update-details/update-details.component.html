@@ -1,0 +1,42 @@
+<br>
+
+<div class="container">
+    <!-- todoForm.dirty 如果form內容有被改變成不合理-->
+    <div class="alert alert-warning" *ngIf="dateCreated.invalid && todoForm.dirty">請選擇日期(Date)</div>
+    <div class="alert alert-warning" *ngIf="title.invalid && todoForm.dirty">請輸入標題(title)</div>
+    <div class="alert alert-warning" *ngIf="mood.invalid && todoForm.dirty">請選擇心情(How are you?)</div>
+
+    <!-- submit it only if not of invalid. -->
+    <form (ngSubmit)="!todoForm.invalid && saveDiary()" #todoForm="ngForm">
+        <div class="form-group">
+            <label>Title</label>
+            <input class="form-control" type="text" #title="ngModel" [ngModel]="dairy.title" name="title"
+                (ngModelChange)="dairy.title = $event" required="required">
+        </div>
+        <fieldset class="form-group">
+            <label>Date</label>
+            <input type="date" #dateCreated="ngModel" [ngModel]="dairy.dateCreated | date:'yyyy-MM-dd' "
+                (ngModelChange)="dairy.dateCreated = $event" class="form-control" name="dateCreated"
+                required="required">
+        </fieldset>
+        <div class="form-group">
+            <label>Feel</label>
+            <select class="form-control" #mood="ngModel" [ngModel]="dairy.mood" (ngModelChange)="dairy.mood = $event"
+                class="form-control" name="mood" required="required">
+                <option VALUE="assets/pic/grinning.png">Delighted</option>
+                <option VALUE="assets/pic/angry.png">Angry</option>
+                <option VALUE="assets/pic/crying.png">Sad</option>
+                <option VALUE="assets/pic/winking.png">Pleased</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" rows="3" #description="ngModel" [ngModel]="dairy.description"
+                name="description" (ngModelChange)="dairy.description = $event"></textarea>
+        </div>
+        <div class="buttonloc">
+            <button routerLink="/" type="button" class="btn btn-light">back</button>
+            <button style="text-align: center;" type="submit" class="btn btn-success">Save</button></div>
+    </form>
+</div>

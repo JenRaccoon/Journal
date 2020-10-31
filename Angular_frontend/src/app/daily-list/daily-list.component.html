@@ -1,0 +1,36 @@
+<br>
+<h1> Journal </h1>
+<div class="buttonloc">
+    <button (click)="addDiary()" class="btn btn-warning">Add</button>
+    <br>
+</div>
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Feel</th>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Detail</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let Diary of diarys">
+                <td style="max-width: 50px"><img src = {{Diary.mood}} /></td>
+                <td>{{Diary.dateCreated | date }}</td>
+                <td>{{Diary.title }}</td>
+
+                <td><button (click)="ReadDiary(Diary.id)" class=" btn btn-success">Read</button></td>
+                <td><button (click)="deleteDiary(Diary.id)" class=" btn btn-danger">Delete</button></td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+</div>
